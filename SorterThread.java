@@ -13,7 +13,9 @@ public class SorterThread extends Thread {
     }
 
     private void insertionSort(double[] array) {
-        for (int i = 1; i < array.length; i++) {
+        int i;
+
+        for (i = 1; i < array.length; i++) {
             double key = array[i];
             int j = i - 1;
             while (j >= 0 && array[j] > key) {

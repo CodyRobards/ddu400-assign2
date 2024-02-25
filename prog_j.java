@@ -37,7 +37,9 @@ public class prog_j {
     }
 
     private static void generateRandomArray(double[] array) {
-        for (int i = 0; i < array.length; i++) {
+        int i;
+
+        for (i = 0; i < array.length; i++) {
             array[i] = Math.random() * 1000;
         }
     }

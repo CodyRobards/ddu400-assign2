@@ -1,0 +1,31 @@
+1) Cody Robards (solo)
+
+2) I think so, althought
+
+@CodyRobards ➜ /workspaces/ddu400-assign2 (main) $ make all
+gcc -o prog prog.c -pthread 
+javac prog_j.java SorterThread.java MergerThread.java
+./prog 10 
+Sorting is done in 0.000081ms when two threads are used
+Sorting is done in 0.000040ms when one thread is used
+./prog 1000 
+Sorting is done in 0.000060ms when two threads are used
+Sorting is done in 0.000040ms when one thread is used
+./prog 5000 
+Sorting is done in 0.000070ms when two threads are used
+Sorting is done in 0.000030ms when one thread is used
+./prog 10000      
+Sorting is done in 0.000069ms when two threads are used
+Sorting is done in 0.000040ms when one thread is used
+java prog_j 10 
+Sorting is done in 1.145768ms when two threads are used
+Sorting is done in 0.030928ms when one thread is used
+java prog_j 1000 
+Sorting is done in 8.73702ms when two threads are used
+Sorting is done in 5.966633ms when one thread is used
+java prog_j 5000
+Sorting is done in 8.912616ms when two threads are used
+Sorting is done in 9.749374ms when one thread is used
+java prog_j 10000 
+Sorting is done in 18.017927ms when two threads are used
+Sorting is done in 24.725533ms when one thread is used

@@ -11,11 +11,12 @@ void *mergeThread_avg(void *params); // Merge two sorted portions
 // Insertion sort implementation
 void insertionSort(double *array, int size)
 {
-    for (int i = 1; i < size; i++)
+    int i, j;
+    double key;
+    for (i = 1; i < size; i++)
     {
-        double key = array[i];
-        int j = i - 1;
-
+        key = array[i];
+        j = i - 1;
         while (j >= 0 && array[j] > key)
         {
             array[j + 1] = array[j];
@@ -30,9 +31,9 @@ void *sortThread_avg(void *params)
 {
     SortParams *sortParams = (SortParams *)params;
     insertionSort(sortParams->subArray, sortParams->size);
-
+    int i;
     double sum = 0;
-    for (int i = 0; i < sortParams->size; i++)
+    for (i = 0; i < sortParams->size; i++)
     {
         sum += sortParams->subArray[i];
     }
@@ -86,8 +87,9 @@ void *mergeThread_avg(void *params)
 
 void generateRandomArray(double *array, int size)
 {
+    int i;
     srand(time(NULL));
-    for (int i = 0; i < size; i++)
+    for (i = 0; i < size; i++)
     {
         array[i] = 1.0 + (rand() / (RAND_MAX / (1000.0 - 1.0)));
     }
@@ -95,7 +97,8 @@ void generateRandomArray(double *array, int size)
 
 void printArray(double *array, int size)
 {
-    for (int i = 0; i < size && i < 10; i++)
+    int i;
+    for (i = 0; i < size && i < 10; i++)
     { // Limited to the first 10 elements as to not clog up the console
         printf("%f ", array[i]);
     }
@@ -126,6 +129,7 @@ int main(int argc, char **argv)
 
     // Two-threaded sort
     clock_gettime(CLOCK_MONOTONIC, &start);
+    insertionSort(A, N);
     clock_gettime(CLOCK_MONOTONIC, &end);
     elapsed_double = (end.tv_sec - start.tv_sec) * 1000.0 + (end.tv_nsec - start.tv_nsec) / 1000000.0;
     printf("Sorting is done in %.6fms when two threads are used\n", elapsed_double);
@@ -135,6 +139,7 @@ int main(int argc, char **argv)
 
     // Single-threaded sort
     clock_gettime(CLOCK_MONOTONIC, &start);
+    insertionSort(A, N);
     clock_gettime(CLOCK_MONOTONIC, &end);
     elapsed_single = (end.tv_sec - start.tv_sec) * 1000.0 + (end.tv_nsec - start.tv_nsec) / 1000000.0;
     printf("Sorting is done in %.6fms when one thread is used\n", elapsed_single);
