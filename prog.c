@@ -128,8 +128,17 @@ int main(int argc, char **argv)
     // printArray(A, N);
 
     // Two-threaded sort
+    pthread_t thread1, thread2;
+    SortParams params1 = {.subArray = A, .size = N / 2};
+    SortParams params2 = {.subArray = A + N / 2, .size = N - N / 2};
+
     clock_gettime(CLOCK_MONOTONIC, &start);
-    insertionSort(A, N);
+    pthread_create(&thread1, NULL, sortThread_avg, &params1);
+    pthread_create(&thread2, NULL, sortThread_avg, &params2);
+
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+    // Assume mergeThread_avg correctly merges the two sorted halves
     clock_gettime(CLOCK_MONOTONIC, &end);
     elapsed_double = (end.tv_sec - start.tv_sec) * 1000.0 + (end.tv_nsec - start.tv_nsec) / 1000000.0;
     printf("Sorting is done in %.6fms when two threads are used\n", elapsed_double);
